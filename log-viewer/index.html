@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Log Viewer · Trader Bot Console</title>
+    <link rel="icon" href="data:," />
+    <link rel="stylesheet" href="/src/styles.css" />
+  </head>
+  <body>
+    <header id="app-nav"></header>
+    <main class="page page--log-viewer">
+      <section class="connection-bar" aria-label="WebSocket connection">
+        <md-outlined-text-field id="ws-url" label="WebSocket URL"></md-outlined-text-field>
+        <md-filled-button id="btn-connect">Connect</md-filled-button>
+        <md-outlined-button id="btn-disconnect" disabled>Disconnect</md-outlined-button>
+        <span id="status-chip" class="status-chip" data-state="disconnected">Disconnected</span>
+      </section>
+
+      <details class="send-panel">
+        <summary class="md-typescale-title-small">Send test request</summary>
+        <form id="form-send-state" class="send-panel__form">
+          <md-outlined-text-field name="user_alias" label="user_alias" value="wancm"></md-outlined-text-field>
+          <md-outlined-text-field name="symbol" label="symbol" value="EURUSD"></md-outlined-text-field>
+          <md-filled-button id="btn-send-state" type="submit" disabled>
+            Send get_portfolio_state
+          </md-filled-button>
+        </form>
+      </details>
+
+      <details class="send-panel" open>
+        <summary class="md-typescale-title-small">Send raw JSON payload</summary>
+        <form id="form-send-json" class="send-panel__form send-panel__form--stack">
+          <div class="send-panel__presets">
+            <span class="md-typescale-label-medium">Preset:</span>
+            <md-text-button type="button" data-preset="get_portfolio_state">get_portfolio_state</md-text-button>
+            <md-text-button type="button" data-preset="validate_order">validate_order</md-text-button>
+          </div>
+          <textarea
+            id="raw-json"
+            class="raw-json"
+            spellcheck="false"
+            rows="10"
+            aria-label="Raw JSON payload"
+          >{
+  "type": "get_portfolio_state",
+  "request_id": "",
+  "user_alias": "wancm",
+  "symbol": "EURUSD"
+}</textarea>
+          <div class="send-panel__row">
+            <label class="send-panel__check">
+              <md-checkbox id="auto-request-id" touch-target="wrapper" checked></md-checkbox>
+              <span class="md-typescale-body-medium">Auto-fill request_id with crypto.randomUUID()</span>
+            </label>
+            <span id="raw-json-error" class="raw-json__error" role="alert"></span>
+            <md-filled-button id="btn-send-json" type="submit" disabled>Send JSON</md-filled-button>
+          </div>
+        </form>
+      </details>
+
+      <section class="toolbar" aria-label="Log toolbar">
+        <md-outlined-text-field id="filter" label="Filter (substring)"></md-outlined-text-field>
+        <label class="toolbar__switch">
+          <md-switch id="auto-scroll" selected></md-switch>
+          <span class="md-typescale-body-medium">Auto-scroll</span>
+        </label>
+        <md-text-button id="btn-clear">Clear</md-text-button>
+        <span id="row-count" class="md-typescale-body-small">0 / 500</span>
+      </section>
+
+      <section class="log-pane" aria-live="polite" aria-label="Log entries">
+        <ol id="log-list" class="log-list"></ol>
+      </section>
+    </main>
+    <script type="module" src="/src/log-viewer.js"></script>
+  </body>
+</html>
