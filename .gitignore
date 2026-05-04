@@ -23,5 +23,10 @@ dist-ssr/
 *.sln
 *.sw?
 
+.env
+.env.example
+.env.local
+.env.staging
+
 # Vite specific
 .vite/
