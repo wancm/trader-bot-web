@@ -5,33 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Trader Bot Console</title>
     <link rel="icon" href="data:," />
-    <link rel="stylesheet" href="/src/styles.css" />
   </head>
   <body>
-    <header id="app-nav"></header>
-    <main class="page page--home">
-      <h1 class="md-typescale-display-small">Trader Bot Console</h1>
-      <p class="md-typescale-body-large">
-        Localhost-only operator UI for the trader-bot stack.
-      </p>
-      <nav class="card-grid" aria-label="Console sections">
-        <a class="nav-card" href="/log-viewer/">
-          <md-icon aria-hidden="true">article</md-icon>
-          <span class="md-typescale-title-medium">Log Viewer</span>
-          <span class="md-typescale-body-small">Live WebSocket message stream</span>
-        </a>
-        <div class="nav-card nav-card--disabled" aria-disabled="true">
-          <md-icon aria-hidden="true">account_balance</md-icon>
-          <span class="md-typescale-title-medium">Portfolio</span>
-          <span class="md-typescale-body-small">TBD</span>
-        </div>
-        <div class="nav-card nav-card--disabled" aria-disabled="true">
-          <md-icon aria-hidden="true">receipt_long</md-icon>
-          <span class="md-typescale-title-medium">Orders</span>
-          <span class="md-typescale-body-small">TBD</span>
-        </div>
-      </nav>
-    </main>
-    <script type="module" src="/src/main.js"></script>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>

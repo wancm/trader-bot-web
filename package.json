@@ -1,19 +1,25 @@
 {
   "name": "@trader-bot/web",
   "private": true,
-  "version": "0.1.0",
+  "version": "0.2.0",
   "type": "module",
-  "description": "Trader Bot console — vanilla JS + Vite + Material Web Components.",
+  "description": "Trader Bot console — React + MUI + Vite.",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview --port 5173"
   },
   "devDependencies": {
+    "@vitejs/plugin-react": "^4.3.4",
     "vite": "^7.0.0"
   },
   "dependencies": {
-    "@material/web": "latest"
+    "@emotion/react": "^11.14.0",
+    "@emotion/styled": "^11.14.0",
+    "@mui/icons-material": "^6.4.8",
+    "@mui/material": "^6.4.8",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
   },
   "engines": {
     "node": ">=20.0.0"
