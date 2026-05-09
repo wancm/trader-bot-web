@@ -1,6 +1,7 @@
 import React from 'react';
 import { Paper, Box, Typography, Table, TableBody, TableCell, TableHead, TableRow } from '@mui/material';
 import useClock from '../hooks/useClock.js';
+import useHeartbeat from '../hooks/useHeartbeat.js';
 
 const STALE_MS = 10_000;
 
@@ -14,6 +15,7 @@ const headSx = { ...cellSx, color: '#2e7d32', fontWeight: 600, fontSize: 10, tex
 
 export default function TickPanel({ ticks }) {
   const now = useClock(1000);
+  const isUp = useHeartbeat('ws://127.0.0.1:9003/ws');
   const rows = Object.entries(ticks).sort(([a], [b]) => a.localeCompare(b));
 
   return (
@@ -22,9 +24,25 @@ export default function TickPanel({ ticks }) {
       variant="outlined"
       sx={{ width: 280, flexShrink: 0, display: 'flex', flexDirection: 'column', overflow: 'hidden', borderColor: '#a5d6a7' }}
     >
-      <Box sx={{ px: 1.5, py: 0.75, bgcolor: '#2e7d32', color: 'white', flexShrink: 0 }}>
+      <Box sx={{ px: 1.5, py: 0.75, bgcolor: '#2e7d32', color: 'white', flexShrink: 0, display: 'flex', alignItems: 'center', gap: 1 }}>
+        <Box sx={{
+          width: 11, height: 11, borderRadius: '50%', flexShrink: 0,
+          bgcolor: isUp ? '#22c55e' : '#ef4444',
+          boxShadow: isUp
+            ? '0 0 0 2px rgba(34,197,94,0.25), 0 0 8px 2px rgba(34,197,94,0.45)'
+            : '0 0 0 2px rgba(239,68,68,0.25), 0 0 8px 2px rgba(239,68,68,0.35)',
+          animation: isUp ? 'ledPulse 2s ease-in-out infinite' : 'ledAlert 1s ease-in-out infinite',
+          '@keyframes ledPulse': {
+            '0%, 100%': { opacity: 1, transform: 'scale(1)' },
+            '50%': { opacity: 0.65, transform: 'scale(0.88)' },
+          },
+          '@keyframes ledAlert': {
+            '0%, 100%': { opacity: 1 },
+            '50%': { opacity: 0.4 },
+          },
+        }} />
         <Typography variant="caption" sx={{ fontWeight: 600, fontSize: 12, letterSpacing: 0.3 }}>
-          Market Price
+          Logger
         </Typography>
       </Box>
 

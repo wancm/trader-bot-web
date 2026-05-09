@@ -3,10 +3,11 @@ import { ThemeProvider, CssBaseline } from '@mui/material';
 import { AppBar, Toolbar, Typography, Tabs, Tab, Box } from '@mui/material';
 import theme from './theme.js';
 import LogsPage from './pages/LogsPage.jsx';
+import AppsAdminPage from './pages/AppsAdminPage.jsx';
 import useLoggerWS from './hooks/useLoggerWS.js';
 
-const NAV_TABS = ['Dashboard', 'Logs', 'Profiles', 'Brokers'];
-const LOGGER_WS_URL = 'ws://127.0.0.1:9501';
+const NAV_TABS = ['Dashboard', 'Logs', 'Profiles', 'Brokers', 'Apps Admin'];
+const LOGGER_WS_URL = 'ws://127.0.0.1:8001';
 
 export default function App() {
   const [tab, setTab] = useState(1);
@@ -36,9 +37,9 @@ export default function App() {
         </Toolbar>
       </AppBar>
       <Box sx={{ mt: '48px', height: 'calc(100vh - 48px)', overflow: 'hidden' }}>
-        {tab === 1 ? (
-          <LogsPage {...wsState} />
-        ) : (
+        {tab === 1 ? <LogsPage {...wsState} />
+        : tab === 4 ? <AppsAdminPage />
+        : (
           <Box sx={{ p: 4, color: 'text.secondary' }}>
             <Typography>{NAV_TABS[tab]} — coming soon</Typography>
           </Box>

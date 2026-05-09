@@ -7,14 +7,26 @@ import PauseIcon from '@mui/icons-material/Pause';
 import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 import ServiceColumn from '../components/ServiceColumn.jsx';
 import TickPanel from '../components/TickPanel.jsx';
+import useHeartbeat from '../hooks/useHeartbeat.js';
 
 const SERVICES = ['trader-bot', 'portfolio-manager', 'broker-manager'];
 const TYPE_FILTERS = ['error', 'warning', 'info', 'verbose'];
+
+const HEARTBEAT_URLS = {
+  'trader-bot':        'ws://127.0.0.1:9000/ws',
+  'portfolio-manager': 'ws://127.0.0.1:9001/ws',
+  'broker-manager':    'ws://127.0.0.1:9002/ws',
+};
 
 export default function LogsPage({ byService, ticks, connected }) {
   const [search, setSearch] = useState('');
   const [typeFilter, setTypeFilter] = useState(null);
   const [paused, setPaused] = useState(false);
+
+  const tbUp = useHeartbeat(HEARTBEAT_URLS['trader-bot']);
+  const pmUp = useHeartbeat(HEARTBEAT_URLS['portfolio-manager']);
+  const bmUp = useHeartbeat(HEARTBEAT_URLS['broker-manager']);
+  const isUp = { 'trader-bot': tbUp, 'portfolio-manager': pmUp, 'broker-manager': bmUp };
 
   // freeze display when paused
   const snapshot = useRef({ byService, ticks });
@@ -108,6 +120,7 @@ export default function LogsPage({ byService, ticks, connected }) {
             data={display.byService[svc]}
             search={search}
             typeFilter={typeFilter}
+            isUp={isUp[svc]}
           />
         ))}
         <TickPanel ticks={display.ticks} />
