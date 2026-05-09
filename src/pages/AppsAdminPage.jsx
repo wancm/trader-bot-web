@@ -3,7 +3,7 @@ import {
   Box, Typography, Paper, Switch, Button, Divider, CircularProgress,
 } from '@mui/material';
 
-const ADMIN_BASE = 'http://127.0.0.1:5001';
+const ADMIN_BASE = 'http://127.0.0.1:5003';
 
 // ── Static app registry ─────────────────────────────────────────────────────
 

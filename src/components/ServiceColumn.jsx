@@ -320,7 +320,7 @@ export default function ServiceColumn({ name, data, search, typeFilter, isUp }) 
   const showAI = name === 'trader-bot';
   const theme = THEME[name] ?? THEME.default;
   const displayName = theme.label ?? name;
-  const tickData = useTicks(showAI ? 'ws://127.0.0.1:8001' : null);
+  const tickData = useTicks(showAI ? 'ws://127.0.0.1:8002/ws' : null);
   const tickRows = useMemo(
     () => Object.entries(tickData).sort(([a], [b]) => a.localeCompare(b)),
     [tickData],

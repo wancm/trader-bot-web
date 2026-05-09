@@ -6,7 +6,6 @@ import SearchIcon from '@mui/icons-material/Search';
 import PauseIcon from '@mui/icons-material/Pause';
 import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 import ServiceColumn from '../components/ServiceColumn.jsx';
-import TickPanel from '../components/TickPanel.jsx';
 import useHeartbeat from '../hooks/useHeartbeat.js';
 
 const SERVICES = ['trader-bot', 'portfolio-manager', 'broker-manager'];
@@ -111,7 +110,7 @@ export default function LogsPage({ byService, ticks, connected }) {
         </Button>
       </Box>
 
-      {/* Columns + tick panel */}
+      {/* Columns */}
       <Box sx={{ flex: 1, display: 'flex', gap: 1, p: 1, overflow: 'hidden', minHeight: 0 }}>
         {SERVICES.map((svc) => (
           <ServiceColumn
@@ -123,7 +122,6 @@ export default function LogsPage({ byService, ticks, connected }) {
             isUp={isUp[svc]}
           />
         ))}
-        <TickPanel ticks={display.ticks} />
       </Box>
     </Box>
   );

@@ -4,9 +4,10 @@ import { AppBar, Toolbar, Typography, Tabs, Tab, Box } from '@mui/material';
 import theme from './theme.js';
 import LogsPage from './pages/LogsPage.jsx';
 import AppsAdminPage from './pages/AppsAdminPage.jsx';
+import TestHarnessPage from './pages/TestHarnessPage.jsx';
 import useLoggerWS from './hooks/useLoggerWS.js';
 
-const NAV_TABS = ['Dashboard', 'Logs', 'Profiles', 'Brokers', 'Apps Admin'];
+const NAV_TABS = ['Dashboard', 'Logs', 'Profiles', 'Brokers', 'Apps Admin', 'Test Harness'];
 const LOGGER_WS_URL = 'ws://127.0.0.1:8001';
 
 export default function App() {
@@ -39,6 +40,7 @@ export default function App() {
       <Box sx={{ mt: '48px', height: 'calc(100vh - 48px)', overflow: 'hidden' }}>
         {tab === 1 ? <LogsPage {...wsState} />
         : tab === 4 ? <AppsAdminPage />
+        : tab === 5 ? <TestHarnessPage />
         : (
           <Box sx={{ p: 4, color: 'text.secondary' }}>
             <Typography>{NAV_TABS[tab]} — coming soon</Typography>
